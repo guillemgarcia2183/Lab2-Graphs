@@ -82,7 +82,7 @@ print("Edges with no 0:", list2)
 subax1 = plt.subplot(111)
 nx.draw(G2, with_labels=True, font_weight='bold')
 
-
+# jaja salu2
 
 
 
