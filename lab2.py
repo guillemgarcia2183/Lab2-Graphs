@@ -108,3 +108,11 @@ def one_thousand_participants(n,k,v):
         if value>v:
             number_of_winners+=1
     return number_of_winners
+"""
+HOW TO CALCULATE THE CHANCES OF WINNING
+dice=int(input('Number of faces in the dice: '))
+throws=int(input('Number of throws the participant will have: '))
+value=int(input('Value above which a participant wins: '))
+p=one_thousand_participants(throws, dice, value) # Number of winners
+print(str((p*100)/1000)+'%') # Show the results in %
+"""
