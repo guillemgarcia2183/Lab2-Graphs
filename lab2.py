@@ -82,7 +82,6 @@ print("Edges with no 0:", list2)
 subax1 = plt.subplot(111)
 nx.draw(G2, with_labels=True, font_weight='bold')
 
-# jaja salu2
 
 
 
@@ -108,7 +107,6 @@ Dodecahedron throw: maximum value, n*12; minimum value, n; number of different n
 Icosahedron throw: maximum value, n*20; minimum value, n; number of different numbers: n*20-n-1
 """
 
-
 def lucky_draw(n):
     """
     INPUT
@@ -133,3 +131,13 @@ def lucky_draw(n):
         final_list[4].append(m*20-m-1)
 
     return final_list
+# ======== second part of task 2 ========
+def one_thousand_participants(n,k,v):
+    number_of_winners=0
+    for participants in range(1000):
+        value=0
+        for throws in range(n):
+            value+=r.randint(1, k)
+        if value>v:
+            number_of_winners+=1
+    return number_of_winners
