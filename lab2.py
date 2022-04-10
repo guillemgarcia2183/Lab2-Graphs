@@ -20,39 +20,43 @@ import examples as ex
 def monitor_interests(G):
     nodes_of_G = G.nodes()
     edges_graph = G.edges()
-    new_graph = nx.Graph()
-    new_graph.add_nodes_from(nodes_of_G)
+    print("Nodes of G:", nodes_of_G)
+    print("Edges of G:", edges_graph)
     for i,edge in enumerate(edges_graph):
         weight = 0
-        print("In node" + " " + str(i) + ":")
+        print("In edges" + "(" + str(edge[0]) + "," + str(edge[1]) + ")")
         interest_1 = G.nodes[edge[0]]["topInterests"]
         interest_2 = G.nodes[edge[1]]["topInterests"]
         print("Interest1:", interest_1)
         print("Interest2:", interest_2)
-
-        if edge[0] != edge[1]:
-            for x in interest_1:
-                if x in interest_2:
-                    weight += 1
-
-            if weight != 0:
-                    new_graph.add_edge(edge[0],edge[1], weight = weight)
         
-        print("Weight:", weight)
+        for x in interest_1:
+            if x in interest_2:
+                weight += 1
+       
+        G[edge[0]][edge[1]]['weight'] = weight #Add weight to edge
+
+     
+        print("Weight:", str(weight))
         print("")
+    
+        weight2 = G.get_edge_data(edge[0],edge[1])
+        if (weight2['weight'] == 0) or (edge[0] == edge[1]): #Remove edge if it's the same or weight is 0
+            G.remove_edge(edge[0],edge[1])
         
-    #print("Initial edges:\n", edges_graph)
-    #print("")
-    #print("Final edges:\n", new_graph.edges())   
-    return new_graph
+    return G
 
 #EXAMPLE PRINCIPAL PROGRAM OF TASK 1
-"""
+
 G = ex.example_monitor_interest() 
+plt.title("Example graph")
+nx.draw(G, with_labels=True, font_weight='bold')
+plt.show()
+
 G2 = monitor_interests(G)
-subax1 = plt.subplot(111)
+plt.title("Monitor interest")
 nx.draw(G2, with_labels=True, font_weight='bold')
-"""
+plt.show()
 
 """
 ===============================================
