@@ -119,4 +119,33 @@ throws=int(input('Number of throws the participant will have: '))
 value=int(input('Value above which a participant wins: '))
 p=one_thousand_participants(throws, dice, value) # Number of winners
 print(str((p*100)/1000)+'%') # Show the results in %
+
+===============================================
+     TASK 3 -> PLANARITY CHECK
+===============================================
 """
+# First function of task 3
+
+# Second function of task 3
+def contains_K5(G):
+    F = nx.complete_graph(5)
+    check = nx.algorithms.isomorphism.GraphMatcher(G, F)
+    return check.subgraph_is_isomorphic()
+
+# Third function of task 3
+def containts_K33(G):
+    k_3_3 = set()
+    nodes = list(G.nodes())
+    i = 0
+    while i < len(nodes):
+        neighbours = list(nx.neighbors(G, nodes[i]))
+        if len(neighbours) >= 3:
+            k_3_3.add(i)
+            for neighbour in neighbours:
+                if len(list(nx.neighbors(G, neighbour))) >= 3:
+                    k_3_3.add(i)
+        if len(k_3_3) >= 6:
+            i = len(nodes)
+        else:
+            i += 1
+    return len(k_3_3) >= 6
