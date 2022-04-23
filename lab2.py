@@ -112,6 +112,42 @@ def one_thousand_participants(n,k,v):
         if value>v:
             number_of_winners+=1
     return number_of_winners
+
+def probability_winning(n,k,v):
+    possible_results = []    
+    favorable_results = []
+    minimum_value = n
+    maximum_value = k*n
+    
+    for value in range(minimum_value,maximum_value+1):
+        possible_results.append(value)
+    
+    print("Possible results:", possible_results, "->", len(possible_results))
+    for value in possible_results:
+        if value > v:
+            favorable_results.append(value)
+        
+    print("Favorable results:", favorable_results, "->", len(favorable_results))
+    
+    probability = (len(favorable_results)) / (len(possible_results))
+    
+    return probability
+
+#EXAMPLE PROBABILITY
+n,k,v = 4,6,8
+winners = one_thousand_participants(n, k, v)
+losers = 1000 - winners
+print("Throws:", n)
+print("Faces:", k)
+print("Value:", v)
+print("")
+print("Number of winners:", winners, "->", winners*100/1000, "%")
+print("Number of Losers:", losers, "->", losers*100/1000, "%")
+print("")
+print("Probability of winning:", probability_winning(n, k, v)*100, "%")
+
+
+
 """
 HOW TO CALCULATE THE CHANCES OF WINNING
 dice=int(input('Number of faces in the dice: '))
