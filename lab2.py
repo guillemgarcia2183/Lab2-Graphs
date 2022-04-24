@@ -46,7 +46,7 @@ def monitor_interests(G):
         
     return G
 
-#EXAMPLE PRINCIPAL PROGRAM OF TASK 1
+#EXAMPLE MAIN PROGRAM OF TASK 1
 
 G = ex.example_monitor_interest() 
 plt.title("Example graph")
@@ -57,6 +57,7 @@ G2 = monitor_interests(G)
 plt.title("Monitor interest")
 nx.draw(G2, with_labels=True, font_weight='bold')
 plt.show()
+
 
 """
 ===============================================
@@ -79,16 +80,6 @@ Icosahedron throw: maximum value, n*20; minimum value, n; number of different nu
 """
 
 def lucky_draw(n):
-    """
-    INPUT
-    n : number of throws a player has.
-    ----------
-    OUTPUT
-    ----------
-    list[list]: a list of lists where every element of the main list is n, ···, n+9 
-    throws of one dice
-    """
-
     # Initialize a list of lists. It has 5 lists inside for each dice possible
     final_list = [[] for x in range(5)] 
     
@@ -133,7 +124,8 @@ def probability_winning(n,k,v):
     
     return probability
 
-#EXAMPLE PROBABILITY
+"""
+Report question: Given n, k and v, can you calculate the probability of winning?
 n,k,v = 4,6,8
 winners = one_thousand_participants(n, k, v)
 losers = 1000 - winners
@@ -145,22 +137,22 @@ print("Number of winners:", winners, "->", winners*100/1000, "%")
 print("Number of Losers:", losers, "->", losers*100/1000, "%")
 print("")
 print("Probability of winning:", probability_winning(n, k, v)*100, "%")
-
-
-
 """
-HOW TO CALCULATE THE CHANCES OF WINNING
-dice=int(input('Number of faces in the dice: '))
-throws=int(input('Number of throws the participant will have: '))
-value=int(input('Value above which a participant wins: '))
-p=one_thousand_participants(throws, dice, value) # Number of winners
-print(str((p*100)/1000)+'%') # Show the results in %
-
+"""
 ===============================================
      TASK 3 -> PLANARITY CHECK
 ===============================================
 """
 # First function of task 3
+def remove_subdivisions(G):
+    returning_graph = nx.Graph.copy(G)
+    nodes = list(returning_graph.nodes())
+    for node in nodes:
+        neighbours = list(nx.neighbors(returning_graph, node))
+        if len(neighbours) == 2:
+            returning_graph.remove_node(node)
+            returning_graph.add_edge(neighbours[0], neighbours[1])
+    return returning_graph
 
 # Second function of task 3
 def contains_K5(G):
@@ -169,7 +161,7 @@ def contains_K5(G):
     return check.subgraph_is_isomorphic()
 
 # Third function of task 3
-def containts_K33(G):
+def contains_K33(G):
     k_3_3 = set()
     nodes = list(G.nodes())
     i = 0
