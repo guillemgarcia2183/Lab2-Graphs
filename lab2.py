@@ -151,6 +151,7 @@ def remove_subdivisions(G):
         neighbours = list(nx.neighbors(returning_graph, node))
         if len(neighbours) == 2:
             returning_graph.remove_node(node)
+#           Although the node is removed, we still have the information of its neigbours  
             returning_graph.add_edge(neighbours[0], neighbours[1])
     return returning_graph
 
